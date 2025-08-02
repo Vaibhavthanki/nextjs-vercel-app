@@ -1,8 +1,12 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'NodeJS'  // Make sure this matches exactly
+    }
+
     environment {
-        CI = 'false'
+        CI = 'false' // React default, disable strict CI
     }
 
     stages {
@@ -12,17 +16,9 @@ pipeline {
             }
         }
 
-        stage('Install Node and Dependencies') {
+        stage('Install Dependencies') {
             steps {
-                sh '''
-                    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-                    export NVM_DIR="$HOME/.nvm"
-                    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-                    nvm install 20
-                    nvm use 20
-                    node -v
-                    npm install
-                '''
+                sh 'npm install'
             }
         }
 
