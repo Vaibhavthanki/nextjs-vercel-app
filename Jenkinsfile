@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        NodeJS 'Node 22'
+        nodejs 'NodeJS'  // Make sure this matches exactly
     }
 
     environment {
